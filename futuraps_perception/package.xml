@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>futuraps_perception</name>
+  <version>0.1.0</version>
+  <description>
+    Perception module for the FutuRaPS project, including point cloud filtering,
+    closest grid services, canopy density estimation, and surface normal analysis.
+  </description>
+
+  <maintainer email="your.email@domain.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <!-- Build system -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Message generation -->
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+
+  <!-- Core ROS dependencies -->
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>builtin_interfaces</depend>
+
+  <!-- RTAB-Map dependency -->
+  <exec_depend>rtabmap_ros</exec_depend>
+
+  <!-- TF -->
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_eigen</depend>
+  <depend>tf2_sensor_msgs</depend>
+
+  <!-- Point cloud -->
+  <depend>pcl_conversions</depend>
+  <depend>pcl_msgs</depend> <!-- remove if you don't use it -->
+
+  <!-- Eigen -->
+  <depend>eigen3_cmake_module</depend>
+
+  <!-- THIS MUST BE TOP-LEVEL, NOT INSIDE <export> -->
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>

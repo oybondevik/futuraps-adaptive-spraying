@@ -1,0 +1,53 @@
+pid_controller:
+  ros__parameters:
+    reference_distance: 0.9
+
+    # +pi/2 tracks a row on platform_link +Y/left.
+    # Use -1.57079632679 if the row is on -Y/right.
+    bearing_ref: 1.57079632679
+
+    v_nominal: 0.15
+    v_max: 0.4
+    w_max: 0.4
+    straight_only: true
+    min_distance_stop: 0.30
+    slow_down_on_heading_error: false
+    heading_slowdown_gain: 0.8
+
+    heading_pid:
+      kp: 0.05
+      ki: 0.0
+      kd: 0.01
+      i_max: 0.2
+
+    distance_pid:
+      kp: 0.2
+      ki: 0.01
+      kd: 0.0
+      i_max: 0.2
+      output_sign: 1.0
+
+    control_rate_hz: 20.0
+    request_period_s: 0.10
+    result_max_age_s: 0.50
+
+    perception_service: /get_closest_grid
+    cmd_vel_topic: /diff_drive_controller/cmd_vel
+    cmd_vel_unstamped_topic: /diff_drive_controller/cmd_vel_unstamped
+    publish_unstamped_cmd_vel: true
+    odom_topic: /diff_drive_controller/odom
+    cmd_vel_frame_id: odom
+    debug_csv_path: /tmp/platform_pid_debug.csv
+
+    grid:
+      cell_size: 0.2
+      rows: 10
+      cols: 10
+      x0: 0.0
+      z0: 0.0
+      y_left_max: 2.5
+      y_right_max: 2.5
+      side: 1
+      front_percentile: 0.05
+      min_points_per_cell: 1
+      conf_min: 0.0

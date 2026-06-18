@@ -1,0 +1,27 @@
+# Request
+string frame_id
+
+# Search region in requested frame
+float32 min_x
+float32 max_x
+float32 min_y
+float32 max_y
+float32 min_z
+float32 max_z
+
+# Points within max_z_detected - top_band_height are considered top-band points
+float32 top_band_height
+
+# Similar idea as closest_grid front_percentile.
+# 0.01 means choose one of the closest/front-most y values robustly.
+float32 front_percentile
+
+uint32 min_points
+
+---
+bool found
+float32 x
+float32 y
+float32 z
+uint32 count
+float32 detected_max_z

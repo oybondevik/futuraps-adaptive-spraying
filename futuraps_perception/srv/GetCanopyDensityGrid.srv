@@ -1,0 +1,27 @@
+# Grid specification
+float32 min_x
+float32 max_x
+float32 min_z
+float32 max_z
+float32 cell_size
+
+# Vertical bounds
+float32 min_y
+float32 max_y
+
+# Algorithm parameters
+float32 vy                # vertical voxel height [m] (column-density mode)
+uint16  k_min_points      # min points per vertical voxel to call it "occupied"
+float32 y_min_canopy      # min y to accept points in top-down cover mode
+bool    use_column_density  # true: column occupancy density (recommended); false: top-down cover
+bool    apply_ema
+float32 alpha             # 0..1, EMA factor if apply_ema
+
+# Frame to compute in (must be reachable via TF)
+string frame_id           # e.g., "base_link"
+
+# Sliding time window over incoming clouds (seconds). 0 = just latest cloud.
+float32 time_window
+
+---
+futuraps_perception/CanopyDensityGrid grid

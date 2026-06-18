@@ -1,0 +1,10 @@
+vo:
+  rtabmap_odom:
+    ros__parameters:
+      frame_id: "platform_link"
+      odom_frame_id: "odom"
+      publish_tf: true
+      wait_for_transform: 0.2
+      approx_sync: true
+      approx_sync_max_interval: 0.02
+      queue_size: 30

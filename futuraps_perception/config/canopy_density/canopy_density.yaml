@@ -1,0 +1,23 @@
+canopy_density_server:
+  ros__parameters:
+    cloud_topic: "/local_map_filtered"   #filtered cloud topic
+    default_frame: "platform_link"
+    publish_default: true
+    publish_rate_hz: 2.0
+    max_buffer_sec: 2.0
+
+    mode: "ortho" # "ortho" or "column"
+
+
+canopy_density_visualizer:
+  ros__parameters:
+    min_x: -3.0
+    max_x: 2.0
+    min_z: -0.2
+    max_z: 2.0
+    cell_size: 0.20
+
+    alpha: 0.85
+    height_offset: 0.01
+
+    frame_id: "platform_link"

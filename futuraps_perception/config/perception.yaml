@@ -1,0 +1,50 @@
+# futuraps_perception/config/perception.yaml
+
+use_sim_time: true
+show_visualization: true
+use_exg: false
+point_cloud_filter:
+  # Use /camera/camera/camera_depth/points to bypass RTABMap and debug camera TF.
+  crop_input_topic: /cloud_obstacles
+  # Use sensor_data when crop_input_topic is a live camera point cloud.
+  crop_input_qos: transient_local
+  crop_frame: platform_link
+  local_map_frame: platform_link
+publish_perception_base_tf: false
+
+perception_base_parent: platform_link
+perception_base:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  roll: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+# In simulation the camera TF is published by the robot URDF. Do not publish a
+# second static transform to camera_link here, or it can conflict with the URDF
+# camera pose when the camera mount is rotated.
+publish_cam_tf: true
+cam:
+  parent_frame: platform_link
+  child_frame: camera_link
+  x: 0.76
+  y: 0.28
+  z: 1.25  
+  roll: 0.7854
+  pitch: 0.0
+  yaw: 1.5708
+
+rtabmap:
+  frame_id: platform_link
+  odom_frame_id: odom
+  map_frame_id: map
+  rgbd_mode: false
+  run_vo: false
+  rgb_topic: /camera/camera/color/image_raw
+  depth_topic: /camera/camera/aligned_depth_to_color/image_raw
+  camera_info_topic: /camera/camera/color/camera_info
+  rgbd_topic: /camera/camera/rgbd_image_raw
+  gps_topic: /emlid/fix
+  odom_topic: /odom
+  imu_topic: /camera/camera/imu

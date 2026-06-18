@@ -1,0 +1,94 @@
+vertical_spray_servo:
+  ros__parameters:
+    control_dt_s: 0.01
+    perception_dt_s: 0.03
+    perception_timeout_s: 0.3
+
+    base_frame: platform_link
+    planning_frame: map
+    closest_grid_frame: platform_link
+    ee_frame: tool0
+
+    tool_axis_forward: 2
+    tool_roll_orientation: -1.57
+    point_tool_into_surface: true
+    # Options:
+    # - perception_normal_world_up: old mode, full normal with fixed world-up roll reference.
+    # - perception_normal_path_tangent: normal with along-path component removed.
+    # - perception_normal_static_yaw: only normal-derived up/down tilt; yaw stays static.
+    orientation_mode: perception_normal_static_yaw # perception_normal_world_up
+    # Limit the nozzle direction to avoid the arm folding back toward itself.
+    # The clamp is applied before building the desired tool orientation.
+    orientation_clamp_enabled: true
+    orientation_clamp_max_deviation_deg: 15.0
+    # Keep the TCP target outside a lateral keepout band around the platform.
+    platform_y_keepout_enabled: true
+    platform_min_abs_y: 0.65
+    # Prevent missing plants/gaps from pulling the arm suddenly far outward.
+    # Outward means increasing abs(y), away from the platform centerline.
+    canopy_gap_guard_enabled: true
+    canopy_gap_max_outward_jump_m: 0.12
+    canopy_gap_outward_speed_mps: 0.08
+    canopy_gap_inward_speed_mps: 0.40
+
+    z_target: 1.4
+    standoff_m: 0.4
+    platform_speed_mps: 0.15
+    lookahead_time_s: 0.50
+    path_tracking_enabled: true
+    path_horizon_m: 1.0
+    path_waypoint_spacing_m: 0.20
+    path_follow_lookahead_m: 0.10
+    path_rebuild_period_s: 10.0
+    filter_tau_s: 0.05
+
+    kp_pos: 20.0
+    kp_rot: 20.0
+
+    v_max: 1.8
+    w_max: 2.0
+
+    servo_twist_topic: /servo_node/delta_twist_cmds
+    closest_srv: /get_closest_grid
+    normal_srv: /get_global_normal
+
+    cell_size: 0.2
+    rows: 10
+    cols: 6
+    x0: 0.0
+    z0: 0.2
+    y_left_max: 2.0
+    y_right_max: 2.0
+    side: 0
+    front_percentile: 0.01
+    min_points_per_cell: 5
+
+    normal_min_x: -0.5
+    normal_max_x: 0.5
+    normal_min_y: -2.0
+    normal_max_y: 2.0
+    normal_min_z: 0.2
+    normal_max_z: 2.0
+
+    auto_start_servo: true
+    auto_start_check_dt_s: 0.2
+    auto_start_timeout_s: 10.0
+    servo_start_service: /servo_node/start_servo
+    auto_start_pid: true
+    pid_enable_service: /pid_controller/enable
+    auto_enable_spray: true
+    spray_enabled_topic: /spray/enabled
+
+    required_joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+
+    log_every_n: 5
+    max_path_history: 500
+    pose_debug_csv_path: /tmp/vertical_servo_pose_debug.csv
+    horizon_debug_csv_path: /tmp/vertical_servo_horizon_path.csv
+    horizon_debug_frame: map

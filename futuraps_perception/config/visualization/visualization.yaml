@@ -1,0 +1,42 @@
+closest_point_visualizer:
+  ros__parameters:
+    # Grid + service
+    min_x:  -2.0
+    max_x:  2.0
+    min_z:  0.0
+    max_z:  2.0
+    min_y: -2.0
+    max_y:  4.0
+
+    cols: 5
+    rows: 10
+
+    origin_x: -0.5
+    origin_z: 0.15
+
+    frame_id: "platform_link"
+    cell_size: 0.2 
+    derive_from_crop_box: false 
+    closest_srv: "/get_closest_grid"
+    y_left_max:  2.0
+    y_right_max: 2.0
+    front_percentile: 0.0
+    min_points_per_cell: 20
+    side: 0
+    show_centers: false
+    centered_grid: false         # ignored when derive=true
+    fallback_y_offset: 0.0
+
+surface_normal_visualizer:
+  ros__parameters:
+    service_name: "/get_global_normal"
+    bounds_service: "/get_cloud_bounds"
+    frame_id: "platform_link"
+    marker_topic: "normal_grid_markers"
+    anchor_mode: "centroid"  # centroid or cell_center
+    fb_x_min: -0.5
+    fb_x_max:  0.5
+    fb_z_min:  0.2
+    fb_z_max:  2.0
+    dim_z: 1
+    dim_x: 1

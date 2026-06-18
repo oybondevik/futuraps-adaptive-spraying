@@ -1,0 +1,81 @@
+spray_coverage_node:
+  ros__parameters:
+    world_frame: map
+    # Accumulate live spray coverage in map so it aligns with the perception map
+    # and planned spray targets.
+    coverage_frame: map
+    nozzle_frame: tool0
+
+    cloud_topic: /cloud_obstacles
+    accumulate_live_cloud: true
+    live_cloud_topic: /cloud_obstacles
+    cloud_qos_reliability: reliable
+    cloud_qos_depth: 10
+    spray_topic: /spray/enabled
+    dose_cloud_topic: /spray_coverage/dose_cloud
+    coverage_topic: /spray_coverage/coverage
+    spray_marker_topic: /spray_coverage/spray_marker
+
+    update_rate_hz: 2.0
+
+    peak_intensity: 2.2
+    fan_angle_deg: 80.0
+    narrow_angle_deg: 35.0
+    use_distance_attenuation: true
+    reference_distance: 0.5
+    min_distance: 0.1
+    attenuation_exponent: 2.0
+    max_attenuation: 10.0
+    min_attenuation: 0.01
+    max_range: 1.0
+    voxel_leaf_size: 0.05
+    max_point_age: 30.0
+    use_recent_cloud_for_occlusion: true
+
+    target_dose: 6.0
+    dose_tolerance_ratio: 1.2
+
+    marker_line_width: 0.01
+    marker_num_rings: 10
+    marker_num_segments: 24
+    marker_show_axis: true
+
+    occlusion_enabled: true
+    occlusion_cell_size: 0.03
+    occlusion_depth_tolerance: 0.02
+
+    save_dose_on_shutdown: true
+    dose_output_directory: /tmp/spray_coverage_results
+    dose_output_filename: spray_dose_points.csv
+
+    # # 3-nozzle boom
+    # # Offsets are in the local tool0 frame
+    # nozzle_offsets_x: [-0.5, 0.0, 0.5]
+    # nozzle_offsets_y: [0.0, 0.0, 0.0]
+    # nozzle_offsets_z: [0.0, 0.0, 0.0]
+
+    # # Local spray directions for each nozzle
+    # nozzle_axes_x: [0.0, 0.0, 0.0]
+    # nozzle_axes_y: [0.0, 0.0, 0.0]
+    # nozzle_axes_z: [1.0, 1.0, 1.0]
+
+    # # Local fan-wide direction for each nozzle.
+    # nozzle_wide_axes_x: [1.0, 1.0, 1.0]
+    # nozzle_wide_axes_y: [0.0, 0.0, 0.0]
+    # nozzle_wide_axes_z: [0.0, 0.0, 0.0]
+
+    # 6-nozzle boom
+    # Offsets are in the local tool0 frame
+    nozzle_offsets_x: [-1.14, -0.64, -0.14, 0.14, 0.64, 1.14]
+    nozzle_offsets_y: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    nozzle_offsets_z: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+    # Local spray directions for each nozzle
+    nozzle_axes_x: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    nozzle_axes_y: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    nozzle_axes_z: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+
+    # Local fan-wide direction for each nozzle.
+    nozzle_wide_axes_x: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    nozzle_wide_axes_y: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    nozzle_wide_axes_z: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]

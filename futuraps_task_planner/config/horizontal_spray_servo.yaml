@@ -1,0 +1,161 @@
+horizontal_spray_servo:
+  ros__parameters:
+    boom_length: 2.5
+    standoff_m: 0.4
+
+    closest_srv: "/get_closest_grid"
+    normal_srv: "/get_global_normal"
+    map_frame: "map"
+    platform_motion_frame: "odom"
+    base_frame: "platform_link"
+    target_frame: "platform_link"
+
+    cell_size: 0.2
+    rows: 10
+    normal_rows: 5
+    cols: 7
+    x0: -0.7
+    z0: 0.10
+    y_left_max: 2.0
+    y_right_max: 2.0
+    side: 0
+    front_percentile: 0.01
+    min_points_per_cell: 5
+
+    normal_min_x: -0.5
+    normal_max_x: 0.5
+    normal_min_y: -2.0
+    normal_max_y: 2.0
+    normal_z_overlap: 0.05
+
+    perception_timeout_s: 5.0
+
+    home_joint_values: [0.0, -1.57, 1.57, -1.57, -1.57, 0.0]
+    home_joint_tolerance: 0.05
+    planning_group: "ur10_arm"
+    eef_step: 0.01
+    jump_threshold: 0.0
+    avoid_collisions: true
+    max_velocity_scaling: 0.2
+    max_acceleration_scaling: 0.2
+    cartesian_velocity_scaling: 0.15
+    cartesian_acceleration_scaling: 0.15
+
+    top_point_srv: "/get_top_canopy_point"
+
+    top_band_height: 0.10
+    top_front_percentile: 0.01
+    top_min_points: 5
+
+    top_min_x: -0.5
+    top_max_x: 0.5
+    top_min_y: -2.0
+    top_max_y: 2.0
+    top_min_z: 0.0
+    top_max_z: 2.5
+
+    add_top_waypoint: true
+    top_waypoint_margin: 0.03
+    min_top_extension: 0.03
+    max_top_extension: 0.40
+
+    orientation_mode: "predefined_tilt"
+    # When true with predefined_tilt, pitch/tilt stays predefined while yaw
+    # follows the horizontal component of the perception normal result.
+    use_perception_yaw: false
+    predefined_tilt_up_deg: 18.0
+    predefined_tilt_down_deg: 12.0
+    max_inward_angle_deg: 25.0
+
+    sample_spacing: 0.02
+
+    pos_gain: 1.5
+    ori_gain: 3.0
+    max_linear_speed: 1.5
+    max_angular_speed: 1.5
+    pos_tolerance: 0.05
+    ori_tolerance: 0.30
+    lookahead_points: 3
+    v_min: 0.25
+    v_max: 0.40
+
+    visualizer_fixed_frame: "platform_link"
+    visualizer_ee_frame: "tool0"
+
+    control_period_ms: 10
+
+    # Smooth sharp y-corners caused by keepout/platform repair.
+    # Only y is changed.
+    # Increase radius for a more gradual transition.
+    # Lower min_sharpness if no transition is detected.
+    local_y_smoothing_enabled: true
+    local_y_smoothing_min_sharpness: 0.020
+    local_y_smoothing_radius: 8
+
+    # Remove hard-to-reach low, far-out endpoint waypoints after repair.
+    # This only trims contiguous endpoints, not interior path points.
+    prune_low_z_outward_waypoints_enabled: true
+    prune_low_z_outward_max_z: 0.35
+    prune_low_z_outward_min_abs_y: 1.00
+    prune_low_z_outward_min_remaining: 5
+
+    reachability_filter:
+      ik_timeout: 0.05
+
+      # General workspace clamps (platform_link).
+      workspace_repair_enabled: true
+      min_y: 0.2
+      max_y: 0.95
+      min_z: 0.5
+      max_z: 1.8
+
+      yz_start_y: 0.80
+      yz_end_y: 1.0
+      z_min_at_start_y: 0.15
+      z_min_at_end_y: 0.40
+
+      # Pull low TCP targets inward instead of only lifting them upward.
+      # If z < low_z_y_limit_max_z, clamp |y| to low_z_y_limit_max_abs_y.
+      low_z_y_limit_enabled: true
+      low_z_y_limit_max_z: 0.50
+      low_z_y_limit_max_abs_y: 1.0
+
+      # Safe/non-folding orientation.
+      safe_orientation_enabled: true
+
+      # Format: [x, y, z, w]
+      # This should be the good orientation where:
+      # - the boom points toward the plants,
+      # - the boom is approximately horizontal,
+      # - the tool does not fold inward toward itself.
+      safe_orientation_xyzw: [-0.653, -0.056, 0.064, 0.753]
+
+      safe_orientation_roll_offsets_deg: [0.0, 10.0, -10.0, 20.0, -20.0, 30.0, -30.0]
+
+      # Simple base-clearance repair.
+      # This pushes points outward when the TCP is around the robot/platform danger height.
+      base_clearance_repair_enabled: false
+      base_clearance_z_min: 0.25
+      base_clearance_z_max: 1.60
+      base_clearance_min_y: 0.68
+      base_clearance_y_offsets_m: [0.0, 0.05, 0.10, 0.15, 0.20]
+
+      # Platform keepout.
+      # platform_width = 0.824 -> half width = 0.412.
+      # Required safe abs(y) = platform_half_width_y + platform_y_margin.
+      platform_keepout_enabled: true
+      platform_half_width_y: 0.412
+      platform_y_margin: 0.25
+      platform_z_min: 0.0
+      platform_z_max: 0.70
+      platform_y_offsets_m: [0.0, 0.05, 0.10, 0.15, 0.20, 0.25]
+
+      # Existing roll relaxation around desired orientation.
+      orientation_relaxation_enabled: true
+      roll_relaxation_angles_deg: [0.0, 10.0, -10.0, 20.0, -20.0, 30.0, -30.0, 45.0, -45.0]
+
+      # Keep this fairly strict. Higher values can allow folding postures.
+      joint_jump_check_enabled: true
+      max_joint_step_rad: 0.40
+      log_rejected_candidates: true
+      log_collision_contacts: true

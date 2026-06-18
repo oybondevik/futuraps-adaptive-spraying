@@ -1,0 +1,27 @@
+# Request
+# frame we want the result in (ex: "base_link")
+string frame_id
+
+# If you want to limit points in some bounds:
+float32 min_x
+float32 min_y
+float32 min_z
+float32 max_x
+float32 max_y
+float32 max_z
+
+
+---
+# Response
+# averaged unit normal
+float32 nx
+float32 ny
+float32 nz
+
+# centroid of the point cluster we used (arrow base)
+float32 cx
+float32 cy
+float32 cz
+
+# confidence / quality metric (e.g. condition number-ish, 0..1)
+float32 confidence

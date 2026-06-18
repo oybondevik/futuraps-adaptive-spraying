@@ -1,0 +1,33 @@
+local_map_filter:
+  ros__parameters:
+    #Input/Output topics
+    input_topic: "/crop_box_filtered_cloud"
+    output_topic: "/local_map_filtered"
+
+    # Frames
+    target_frame: "platform_link"
+    transform_to_target: true
+
+    # Stage 1: height cut (pot removal)
+    enable_height_filter: false
+    bottom_cut_m: 0.20              # pot height + margin  
+    top_cut_m: 3.00                 # height of plant + margin
+
+    # Stage 2: outlier cleanup
+    enable_radius_outlier: false
+    radius: 0.06
+    min_neighbors: 10
+
+    # Stage 3: voxel
+    enable_voxel_downsample: false
+    voxel_leaf: 0.01
+
+    # Stage 4 (optional): ExG
+    use_exg: false
+    normalize_rgb: true
+    exg_threshold: 0.0
+    drop_low_intensity: false
+    min_intensity: 0.01
+
+    # Debug topics
+    publish_debug_topics: false

@@ -1,0 +1,47 @@
+horizontal_spray:
+  ros__parameters:
+    use_sim_time: true
+
+    planning_group: ur10_arm
+
+    map_frame: map
+    base_frame: platform_link
+    target_frame: platform_link
+
+    boom_length: 1.4
+    standoff_m: 0.4
+
+    eef_step: 0.01
+    jump_threshold: 0.0
+    avoid_collisions: true
+    max_velocity_scaling: 0.2
+    max_acceleration_scaling: 0.2
+    cartesian_velocity_scaling: 0.15
+    cartesian_acceleration_scaling: 0.15
+
+    cell_size: 0.3
+    rows: 5
+    cols: 5
+    x0: -0.75
+    z0: 0.20
+    y_left_max: 2.0
+    y_right_max: 2.0
+    side: 0
+    front_percentile: 0.05
+    min_points_per_cell: 1
+    
+    normal_min_x: -0.5
+    normal_max_x: 0.5
+    normal_min_y: -2.0
+    normal_max_y: 2.0
+    normal_z_overlap: 0.3
+
+    max_waypoint_repair_attempts: 5
+    repair_position_blend: 0.5
+    repair_first_point_blend: 0.4
+    drop_bad_waypoint_as_last_resort: true
+
+    allow_stale_state_after_platform_motion: false
+    allow_stale_state_for_planning: false
+    planning_retry_sleep_s: 0.2
+    state_wait_timeout_s: 1.5

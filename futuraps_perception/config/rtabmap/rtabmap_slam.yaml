@@ -1,0 +1,29 @@
+rtabmap:
+  ros__parameters:
+    # Frames / TF
+    frame_id: "platform_link"
+    odom_frame_id: "odom"
+    odom_topic: "/odom"
+    map_frame_id: "map"
+    publish_tf: true
+    wait_for_transform: 0.2
+
+    # Sync/queues
+    approx_sync: true
+    approx_sync_max_interval: 0.02
+    queue_size: 30
+
+    # Mapping resolution
+    Grid/CellSize: "0.001"
+    Grid/MinDepth: "0.2"
+
+    # Behavior
+    delete_db_on_start: true
+    verbose: false
+
+    # Disable loop closure
+    Kp/MaxFeatures: "-1"
+
+    # # Enable GPS usage in pose graph optimization
+    # Optimizer/PriorsIgnored: "false"
+    # Rtabmap/LoopGps: "true"

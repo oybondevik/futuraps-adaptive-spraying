@@ -1,0 +1,19 @@
+closest_grid_server:
+  ros__parameters:
+    cloud_topic: "/local_map_filtered"
+    base_link: "platform_link"
+
+cloud_bounds_server:
+  ros__parameters:
+    cloud_topic: "/local_map_filtered"
+    base_link: "platform_link"
+
+surface_normal_server:
+  ros__parameters:
+    cloud_topic: "/local_map_filtered"
+    frame_id: "platform_link"
+
+top_canopy_point_server:
+  ros__parameters:
+    cloud_topic: "/local_map_filtered"
+    frame_id: "platform_link"

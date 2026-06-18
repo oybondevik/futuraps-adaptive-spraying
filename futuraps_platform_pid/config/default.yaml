@@ -1,0 +1,58 @@
+pid_controller:
+  ros__parameters:
+    # Desired lateral distance to the detected crop row or canopy.
+    reference_distance: 0.6
+
+    # Desired bearing to the detected row in the platform frame.
+    # +pi/2 tracks a row on +Y/left, -pi/2 tracks a row on -Y/right.
+    bearing_ref: 1.57079632679
+
+    # Platform velocity limits.
+    v_nominal: 0.15
+    v_max: 0.35
+    w_max: 0.8
+
+    # If true, the controller only drives forward and uses perception for
+    # stop/no-row safety.
+    straight_only: false
+    min_distance_stop: 0.30
+    slow_down_on_heading_error: false
+    heading_slowdown_gain: 0.8
+
+    heading_pid:
+      kp: 1.2
+      ki: 0.0
+      kd: 0.05
+      i_max: 0.6
+
+    distance_pid:
+      kp: 0.8
+      ki: 0.0
+      kd: 0.0
+      i_max: 0.4
+      output_sign: 1.0
+
+    control_rate_hz: 20.0
+    request_period_s: 0.10
+    result_max_age_s: 0.50
+
+    perception_service: /get_closest_grid
+    cmd_vel_topic: /diff_drive_controller/cmd_vel
+    cmd_vel_unstamped_topic: /diff_drive_controller/cmd_vel_unstamped
+    publish_unstamped_cmd_vel: true
+    odom_topic: /diff_drive_controller/odom
+    cmd_vel_frame_id: odom
+    debug_csv_path: /tmp/platform_pid_debug.csv
+
+    grid:
+      cell_size: 0.3
+      rows: 5
+      cols: 5
+      x0: -0.15
+      z0: 0.2
+      y_left_max: 2.0
+      y_right_max: 2.0
+      side: 0
+      front_percentile: 0.01
+      min_points_per_cell: 10
+      conf_min: 0.0
